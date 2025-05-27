@@ -1,5 +1,5 @@
 name: "Blacksmith User Session"
-description: "Enables linger for the 'runner' user and creates a user session using systemd-container tools. Intended for Blacksmith runners"
+description: "Intended for Blacksmith runners: Enables linger and creates a user session for `runner`"
 inputs: {}
 
 runs:
