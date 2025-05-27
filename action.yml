@@ -1,0 +1,14 @@
+name: "Blacksmith User Session"
+description: "Enables linger for the 'runner' user and creates a user session using systemd-container tools. Intended for Blacksmith runners"
+inputs: {}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Enable linger and create user session (workaround)
+      if: ${{ startsWith(runner.name, 'blacksmith-') }}
+      run: |
+        sudo loginctl enable-linger runner
+        sudo apt-get install -y systemd-container
+        sudo machinectl shell runner@ /usr/bin/echo "User session created"
+      shell: bash
