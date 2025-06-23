@@ -5,10 +5,15 @@ inputs: {}
 runs:
   using: "composite"
   steps:
+    - name: Install required packages to enable user session (workaround)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y systemd-container
+      shell: bash
+  
     - name: Enable linger and create user session (workaround)
       if: ${{ startsWith(runner.name, 'blacksmith-') }}
       run: |
         sudo loginctl enable-linger runner
-        sudo apt-get install -y systemd-container
         sudo machinectl shell runner@ /usr/bin/echo "User session created"
       shell: bash
